@@ -8,19 +8,68 @@
   pointer-events: none;
 }
 
-.App-header {
+.main {
   background-color: #282c34;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
+  padding-top: 30px;
   color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: start;
+  flex: 1 1 auto;
 }
 
-.App-link {
-  color: #61dafb;
+.main input, .result_text, .zigzag_text {
+  font-size: 40px;
+  width: 60%;
+  align-self: center;
+}
+
+.zigzag_text {
+  min-height: 200px;
+}
+
+.false_dot {
+  color: #282c34;;
+}
+
+.encrypt_block, .decrypt_block {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.error {
+  border: 1px solid red;
+  background-color: white;
+  color: red;
+}
+
+button {
+  height: 42px;
+  width: 120px;
+  align-self: center;
+}
+
+.zigzag_row {
+  display: flex;
+  justify-content: space-around;
+  /*width: 160px;*/
+}
+
+.zigzag_cell {
+  border: 1px solid grey;
+  font-size: 40px;
+  width: 100%;
+}
+
+pre {
+  font-size: 18px;
+  text-align: left;
+  padding-top: 50px;
+  max-width: 50%;
 }
 
 @keyframes App-logo-spin {
