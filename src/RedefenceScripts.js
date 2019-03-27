@@ -32,7 +32,7 @@ export const decrypt = (text, key) => {
     const cipherRows = sliceCipherText(formatted, key);
     const plain_text = [];
 
-    recursiveDecrypt(plain_text, cipherRows, 0);
+    recursiveDecrypt(plain_text, cipherRows);
 
     return plain_text;
 };
@@ -84,8 +84,10 @@ const sliceCipherText = (cipher_text, key) => {
     return sortedResult;
 };
 
-const recursiveDecrypt = (plain_text, cipherRows, count) => {
-    if (count === 0) {
+const recursiveDecrypt = (plain_text, cipherRows, firstRow = true) => {
+    const totalLength = [].concat.apply([], cipherRows).join('').length;
+    console.log(totalLength)
+    if (firstRow) {
         for (let i = 0; i < cipherRows.length; i++) {
             plain_text.push(cipherRows[i][0])
             cipherRows[i] = cipherRows[i].slice(1)
@@ -98,8 +100,8 @@ const recursiveDecrypt = (plain_text, cipherRows, count) => {
             cipherRows[i + 1] = cipherRows[i + 1] && cipherRows[i + 1].slice(1)
         }
     }
-    if (count < 7) {
-        return recursiveDecrypt(plain_text, cipherRows.reverse(), count + 1)
+    if (totalLength > 0) {
+        return recursiveDecrypt(plain_text, cipherRows.reverse(), false)
     }
 };
 
