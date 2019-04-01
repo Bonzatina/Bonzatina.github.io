@@ -1,3 +1,7 @@
+body {
+  background-color: #282c34;
+}
+
 .App {
   text-align: center;
 }
@@ -8,9 +12,14 @@
   pointer-events: none;
 }
 
+.sample {
+  color: white;
+  text-align: left;
+  padding-left: 10%;
+}
+
 .main {
-  background-color: #282c34;
-  min-height: 100vh;
+  min-height: 50vh;
   font-size: calc(10px + 2vmin);
   padding-top: 30px;
   color: white;
@@ -28,7 +37,6 @@
 }
 
 .zigzag_text {
-  /*min-height: 240px;*/
   flex-grow: 1;
 }
 
@@ -36,7 +44,6 @@
 .zigzag_row {
   display: flex;
   justify-content: space-around;
-  /*width: 160px;*/
 }
 
 .zigzag_cell {
@@ -53,7 +60,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 800px;
 }
 
 .error {
@@ -70,9 +76,13 @@ button {
 
 
 .code_examples {
-  /*max-width: 50%;*/
   margin: 5px;
-  /*margin-top: 60px;*/
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: start;
+  flex: 1 1 auto;
 
 }
 

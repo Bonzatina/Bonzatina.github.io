@@ -17,7 +17,8 @@ class App extends Component {
                 result_text: '',
                 key: '',
             },
-            error: false
+            error: false,
+            zigzag_text: ''
         };
         this.updatePlainText = this.updatePlainText.bind(this);
         this.updateCipherText = this.updateCipherText.bind(this);
@@ -69,14 +70,14 @@ class App extends Component {
         if (!validationResult) {
             const crypt = type === 'encrypt' ? encrypt : decrypt;
             const cryptText = crypt(this.state[type].task_text, this.state[type].key);
-            console.log(cryptText)
+            // console.log(cryptText)
             this.setState({
                 [type]: {
                     ...this.state[type],
                     result_text: cryptText,
                     error: false
                 }
-            })
+            }, () => this.setState({zigzag_text: this.renderZigZag(this.state.encrypt.result_text, this.state.encrypt.key)}))
         }
         else {
             this.setState({
@@ -92,10 +93,12 @@ class App extends Component {
         const divs = [];
         const sortingKeys = key.split('');
         const sortedRows = [];
+
         for (let i = 0; i < sortingKeys.length; i++) {
             sortedRows[sortingKeys[i] - 1] = result_text[i];
         }
-        console.log(sortedRows)
+
+        // console.log(sortedRows)
         sortedRows.map((el, ind_parent, arr_parent) => {
             const divsRow = [];
             el.map((el_child, ind_child, arr_child) => {
@@ -144,10 +147,12 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <header className="main">
-
+                <div className="sample">
+                    <p>read this please</p>
+                </div>
+                <div className="main">
                     <div className="encrypt_block">
-                        <p>read this please</p>
+
                         <input placeholder="Type plain text" value={this.state.encrypt.task_text}
                                onChange={this.updatePlainText}/>
                         <input placeholder="Type key" value={this.state.encrypt.key} onChange={this.updatePlainKey}/>
@@ -156,16 +161,10 @@ class App extends Component {
                         <div className="result_text">{this.state.encrypt.result_text}</div>
 
                         <div className="zigzag_text">
-                            {this.state.encrypt.result_text && this.renderZigZag(this.state.encrypt.result_text, this.state.encrypt.key)}
+                            {this.state.zigzag_text && this.state.zigzag_text}
                         </div>
-
-                        <div className="code_examples">
-                            <pre>{encrypt_code}</pre>
-                        </div>
-
                     </div>
                     <div className="decrypt_block">
-                        <p className="fake_dot"> .</p>
                         <input placeholder="Type cipher text" value={this.state.decrypt.task_text}
                                onChange={this.updateCipherText}/>
                         <input placeholder="Type key" value={this.state.decrypt.key} onChange={this.updateCipherKey}/>
@@ -173,19 +172,18 @@ class App extends Component {
                         {this.state.decrypt.error && <div className="error">{this.state.decrypt.error}</div>}
                         <div className="result_text">{this.state.decrypt.result_text}</div>
                         <div className="zigzag_text">
-
-                        </div>
-
-                        <div className="code_examples">
-                            <pre>{recursive_ecrypt}</pre>
-                            <pre>{slice_cipher_ext}</pre>
-                        </div>
-
-                        <div>
-
                         </div>
                     </div>
-                </header>
+                </div>
+                <div className="code_examples">
+                    <div>
+                        <pre>{encrypt_code}</pre>
+                    </div>
+                    <div>
+                        <pre>{recursive_ecrypt}</pre>
+                        <pre>{slice_cipher_ext}</pre>
+                    </div>
+                </div>
             </div>
         );
     }
