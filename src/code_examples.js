@@ -7,7 +7,7 @@ export const encrypt_code = `
     }
     formatted.map((el, ind, arr) => {
         const cycle = number_of_rows * 2 - 2;
-        if (ind < arr.length && ind % cycle < cycle) {
+        if (ind < arr.length) {
             if (ind % cycle < number_of_rows) {
                 rows[ind % cycle].push(el)
             }
